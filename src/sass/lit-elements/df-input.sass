@@ -1,0 +1,59 @@
+df-input 
+  position: relative
+  align-items: center
+  display: flex
+  flex-wrap: wrap    
+  font-size: 1.4rem
+  &[disabled]
+    opacity: 0.6
+    input
+      cursor: not-allowed 
+  &[readonly]
+    input
+      cursor: not-allowed 
+  &[alert]
+    
+
+.df-input  
+  background-color: #fff
+  position: relative
+  height: calc(var(--form-line-height, 4rem) - 2*var(--form-border-size, 0))    
+  border: var(--form-border-size) solid var(--form-border-color, #d0d0d0)   
+  position: relative
+  display: grid
+  grid-template-columns: 1fr auto
+  width: 100%
+  transition: var(--transition)
+  border-radius: var(--form-border-radius, 0)
+  grid-area: 1/1/1/-1
+  overflow: hidden
+  --icon-size: 2rem
+  --icon-padding: 0.5rem
+  &.alert 
+    color: var(--color-alert)
+    border-color: var(--color-alert)
+    .df-input__label 
+      color: var(--color-alert) 
+  button 
+    background-color: transparent
+    --button-border-size: 0
+    --icon-color: var(--color-content)
+  &__label
+    //position: absolute  
+    font-size: 1.1rem
+    vertical-align: middle
+    align-self: center
+    padding-left: var(--form-padding)
+    position: absolute
+    grid-area: 1/1/1/2
+    color: var(--form-label-color, lightgray)
+    top: 0
+    line-height: var(--form-line-height, 4rem)
+    height: var(--form-line-height, 4rem)  
+    transition: var(--transition) 
+    div.focus & 
+      transform: translateY(-34%)
+
+       
+
+  

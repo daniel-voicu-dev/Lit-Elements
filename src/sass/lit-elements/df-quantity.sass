@@ -1,0 +1,28 @@
+df-quantity 
+  position: relative
+  align-items: center
+  display: flex
+  flex-wrap: wrap    
+  font-size: 1.4rem
+.df-quantity  
+  background-color: #fff
+  position: relative
+  height: calc(var(--form-line-height, 4rem) - 2*var(--form-border-size, 0))    
+  border: var(--form-border-size) solid var(--form-border-color, #d0d0d0)   
+  position: relative
+  display: grid
+  grid-template-columns: 1fr auto
+  width: 100%
+  transition: var(--transition)
+  border-radius: var(--form-border-radius, 0)
+  grid-area: 1/1/1/-1
+  overflow: hidden
+  --icon-size: 2rem
+  --icon-padding: 0.5rem  
+  &.alert 
+    color: var(--color-alert)
+    border-color: var(--color-alert)
+    .df-quantity__label 
+      color: var(--color-alert)    
+
+  

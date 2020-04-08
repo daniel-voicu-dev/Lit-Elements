@@ -1,0 +1,107 @@
+df-select 
+  --button-bg: transparent 
+  --button-hover-bg: transparent 
+  --button-color: var(--color-content)
+  --button-hover-color: var(--color-content)  
+  --height: calc(var(--form-line-height) - 2*var(--form-border-size))
+  --button-width: 3rem
+  display: inline-flex 
+  border: var(--form-border-size) solid var(--form-border-color, #d0d0d0)    
+  position: relative 
+  z-index: auto    
+  height: var(--height)
+  .df-select   
+    --label-font-size: 1.2rem
+    //max-width: 20rem
+    display: grid 
+    grid-template-columns: 1fr var(--button-width)
+    transition: all 0s linear  
+    position: relative
+    height: 100%  
+    z-index: auto 
+    width: 100%
+    // &.open 
+    //   box-shadow: 0 0 4px 0px #e8e8e8
+    &.focus
+      .df-select__label        
+        font-size: var(--label-font-size)
+        transform: translate3d(0, calc(0rem - 1.5rem), 0)
+        color: var(--form-border-color)
+        font-weight: 300
+    &__input
+      --form-border-size: 0 
+      grid-area: 1/1/1/-1           
+      height: 100%
+      background-color: transparent       
+      padding-right: var(--button-width)
+      line-height: initial  
+      padding-left: var(--form-input-side-padding)  
+      z-index: 1
+      position: relative   
+      height: calc(var(--form-line-height) - var(--form-font-size) - 0.6rem)
+      align-self: flex-end  
+    &__label 
+      z-index: 1
+      grid-area: 1/1/1/-1
+      margin: 0
+      padding: 0 var(--form-input-side-padding)
+      transition: all 0.2s ease-in-out    
+      color: var(--form-placeholder-color)          
+    button 
+      background-color: transparent
+      min-width: 0
+      padding: 0
+      display: flex 
+      align-items: center 
+      justify-content: center
+      grid-area: 1/2/1/3  
+      z-index: 2
+      position: relative
+      ion-icon 
+        margin-top: 0
+        &[name="alert-circle"]        
+          --icon-color: var(--color-error)
+    &__list 
+      display: none
+      position: absolute
+      top: 100%
+      left: calc(0px - var(--form-border-size))
+      opacity: 0
+      flex-wrap: wrap
+      // grid-area: 2/1/2/-1
+      border: var(--form-border-size) solid var(--form-border-color)
+      border-top: 0  
+      background-color: var(--color-light)      
+      z-index: 3
+      width: calc(100% + 2*var(--form-border-size))
+      &.open 
+        display: block
+        opacity: 1
+    &__option 
+      cursor: pointer
+      line-height: var(--height)
+      padding: 0 var(--form-input-side-padding)
+      width: 100%
+      display: flex 
+      flex-wrap: wrap
+      font-size: var(--form-font-size)
+      z-index: 2
+      position: relative
+      &:hover
+        background-color: whitesmoke
+    &__value--visible 
+      height: calc(var(--form-line-height) - var(--form-font-size) - 0.6rem)
+      align-self: flex-end 
+      display: flex 
+      align-items: center
+      line-height: initial
+      border: 0
+      grid-area: 1/1/1/-1
+      z-index: 0
+      position: relative
+      transition: all 0.2s ease-in-out
+      padding: 0
+      &.open
+        opacity: 0.5
+      &.writing 
+        opacity: 0  
