@@ -7,11 +7,62 @@
 </head>
 <body>
   <form class="list">
-    <df-input type="text" name="text" value="[disabled]" class="item" disabled></df-input>
-    <df-input type="text" name="text" value="[readonly]" class="item" readonly></df-input>
-    <df-input type="number" name="number" value="" placeholder="[placeholder][number]" class="item" required></df-input>
-    <df-input type="email" name="email" value="" label="[label][email]" class="item"></df-input>
-    <df-input type="password" name="password" value="" class="item"></df-input>
+    <div class="c">
+      <h2 class="item">Input</h2>
+      <df-input type="text" name="text" value="[disabled]" class="item" disabled></df-input>
+      <df-input type="text" name="text" value="[readonly]" class="item" readonly></df-input>    
+      <div class="item flex">
+        <df-input type="number" name="number" value="" placeholder="[placeholder][number][required]" required></df-input>
+        <button type="button" style="margin-left: 2rem">Validate number</button>
+      </div>
+      <df-input type="email" name="email" value="" label="[label][email]" class="item"></df-input>
+      <df-input type="password" name="password" value="" placeholder="[placeholder][password]" class="item"></df-input>
+    </div>
+    <div class="c">
+      <h2 class="item">Select</h2>
+      <df-select name="Countries1" label="[label][required]" value="" selected="Romania" class="item" required>            
+        <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
+        <df-option value="RO" label="Romania"><span>Romania</span></df-option>
+        <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
+        <df-option value="ES" label="Spain"><span>Spain</span></df-option>
+        <df-option value="FR" label="France"><span>France</span></df-option>
+      </df-select>
+      <df-select name="Countries2" value="" selected="" class="item" placeholder="[placeholder][required][disabled]" required disabled>            
+        <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
+        <df-option value="RO" label="Romania"><span>Romania</span></df-option>
+        <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
+        <df-option value="ES" label="Spain"><span>Spain</span></df-option>
+        <df-option value="FR" label="France"><span>France</span></df-option>
+      </df-select>
+      <df-select name="Countries2" value="" selected="Romania" class="item" placeholder="[placeholder][disabled]" disabled>            
+        <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
+        <df-option value="RO" label="Romania"><span>Romania</span></df-option>
+        <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
+        <df-option value="ES" label="Spain"><span>Spain</span></df-option>
+        <df-option value="FR" label="France"><span>France</span></df-option>
+      </df-select>
+      <df-select name="Countries2" value="" selected="ES" class="item" placeholder="[placeholder][readonly]" readonly>            
+        <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
+        <df-option value="RO" label="Romania"><span>Romania</span></df-option>
+        <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
+        <df-option value="ES" label="Spain"><span>Spain</span></df-option>
+        <df-option value="FR" label="France"><span>France</span></df-option>
+      </df-select>    
+      <df-select name="Countries2" value="" selected="" class="item" placeholder="[placeholder][required]" required>            
+        <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
+        <df-option value="RO" label="Romania"><span>Romania</span></df-option>
+        <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
+        <df-option value="ES" label="Spain"><span>Spain</span></df-option>
+        <df-option value="FR" label="France"><span>France</span></df-option>
+      </df-select>
+    </div>
+    <div class="c">
+      <h2 class="item">Quantity</h2>
+      <df-quantity name="Quantity" value="3" min="3" step="2" maxlength="3"></df-quantity>
+      <df-quantity name="Quantity" value="4" min="1" step="2" maxlength="4"></df-quantity>
+    </div>
+    
+    
   </form>
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
   <script src="app.bundle.js"></script>

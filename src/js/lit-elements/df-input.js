@@ -15,8 +15,8 @@ export class DefaulInput extends LitElement {
       placeholder: {type: String},     
       mask: {type: String},      
 
-      error: {type: Boolean},
-      focus: {type: Boolean},
+      error: {type: Boolean, reflect: true},
+      focus: {type: Boolean, reflect: true}, 
      
       required: {type: Boolean, attribute:"required", reflect: true},
       readonly: {type: Boolean, attribute:"readonly", reflect: true},
@@ -30,8 +30,8 @@ export class DefaulInput extends LitElement {
     this.type="text";  
     this.value="";
 
-    this.class="";
-    this.id= "n"+uuidv4();
+    this.class="";    
+    this.id= this.hasAttribute("name") ? this.getAttribute("name") : "n"+uuidv4();
     this.label="";
     this.placeholder="";
     this.mask=""
@@ -104,20 +104,18 @@ export class DefaulInput extends LitElement {
   onKeyDown(e) {
     if(this.type === "number") {
       let regex = RegExp("^[0-9/]*$");  
-      if(!regex.test(e.key) && e.keyCode !==8) {
+      if(!regex.test(e.key) && e.keyCode !==8 && e.keyCode !== 37 && e.keyCode !==39) {
         e.preventDefault();
       } 
     }
   }
   onFocusIn(e) {
-    console.log("focusin")
     this.focus = true
   }
   onBlur(e) {
     this.dispatchEvent(new Event("blur", {bubbles: true,cancelable: true}));
     if(this.value === "") {      
-      this.focus = false;
-      console.log("required", this.required)
+      this.focus = false;     
       if(this.required) {
         this.error = true;
       } 

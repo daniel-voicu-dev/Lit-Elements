@@ -3,37 +3,41 @@ df-input
   align-items: center
   display: flex
   flex-wrap: wrap    
+  align-items: center
   font-size: 1.4rem
-  &[disabled]
-    opacity: 0.6
-    input
-      cursor: not-allowed 
-  &[readonly]
-    input
-      cursor: not-allowed 
-  &[alert]
-    
-
-.df-input  
-  background-color: #fff
-  position: relative
-  height: calc(var(--form-line-height, 4rem) - 2*var(--form-border-size, 0))    
-  border: var(--form-border-size) solid var(--form-border-color, #d0d0d0)   
-  position: relative
-  display: grid
-  grid-template-columns: 1fr auto
-  width: 100%
-  transition: var(--transition)
-  border-radius: var(--form-border-radius, 0)
-  grid-area: 1/1/1/-1
+  height: calc(var(--form-line-height, 4rem) 
   overflow: hidden
   --icon-size: 2rem
   --icon-padding: 0.5rem
-  &.alert 
-    color: var(--color-alert)
-    border-color: var(--color-alert)
+  &[disabled]
+    opacity: 0.6
+    *
+      cursor: not-allowed 
+  &[readonly]
+    *
+      cursor: not-allowed 
+  &[error]
+    .df-input     
+      color: var(--color-alert)
+      --form-border-color: var(--color-alert)      
+    .df-input__label       
+      color: var(--color-alert)   
+  &[focus]
     .df-input__label 
-      color: var(--color-alert) 
+      transform: translateY(-34%)      
+.df-input    
+  background-color: var(--form-bg-color, #fff)  
+  color: var(--form-color, var(--color-content))
+  position: relative
+  display: grid
+  grid-template-columns: 1fr auto
+  align-items: center
+  width: 100%
+  height: calc(var(--form-line-height, 4rem) - 2*var(--form-border-size, 0rem))   
+  border: var(--form-border-size) solid var(--form-border-color, #d0d0d0) 
+  border-radius: var(--form-border-radius, 0)
+  transition: var(--transition)
+  overflow: hidden
   button 
     background-color: transparent
     --button-border-size: 0
@@ -46,13 +50,13 @@ df-input
     padding-left: var(--form-padding)
     position: absolute
     grid-area: 1/1/1/2
-    color: var(--form-label-color, lightgray)
+    color: var(--form-placeholder-color, lightgray)
     top: 0
-    line-height: var(--form-line-height, 4rem)
-    height: var(--form-line-height, 4rem)  
+    line-height: var(--form-line-height, 4rem)  
     transition: var(--transition) 
-    div.focus & 
-      transform: translateY(-34%)
+  &__input  
+    line-height: var(--form-line-height, 4rem)
+     
 
        
 

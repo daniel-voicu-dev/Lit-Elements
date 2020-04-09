@@ -4,52 +4,43 @@ import {v4 as uuidv4} from "uuid"
 export class DefaultQuantity extends LitElement {
   static get properties() { 
     return {          
-      name: {type: String, attribute: "name"},      
-      value: {type: String, attribute: "value", reflect: true},
-      min: {type: Number, attribute: "min"},
-      max: {type: Number, attribute: "max"},
-      step: {type: Number, attribute: "step"},
+      name: {type: String},      
+      value: {type: Number, reflect: true},
+      min: {type: Number},
+      max: {type: Number},
+      step: {type: Number},
+      maxlength: {type: Number},
 
 
-      class: {type: String, attribute: "class"},
-      id: {type: String, attribute: "id"},     
+      class: {type: String},
+      id: {type: String},     
 
-      error: {type: Boolean},
-      focus: {type: Boolean},
+      error: {type: Boolean, reflect: true},
+      focus: {type: Boolean, reflect: true},
      
-      required: {type: Boolean, attribute: "required", reflect: true},
-      readonly: {type: Boolean, attribute: "readonly", reflect: true},
-      disabled: {type: Boolean, attribute: "disabled", reflect: true},
-      maxlength: {type: String, attribute: "maxlength"}
+      required: {type: Boolean, reflect: true},
+      readonly: {type: Boolean, reflect: true},
+      disabled: {type: Boolean, reflect: true}
+      
      
     };
   }   
+  constructor() {
+    super();
 
-  firstUpdated() {        
-    if(this.value === undefined) {
-      if(this.min !== undefined) {
-        this.value = this.min
-      } else {
-        this.value = 1;
-      }
-      
-    }
-    if(this.class === undefined) {
-      this.class = "";
-    }    
-    if(this.name === undefined) {
-      console.log("You must set up a [name] attribute for the input", this);      
-    }    
-    if(this.id === undefined) {
-      this.id = uuidv4();
-    }
-    if(this.value === undefined) {
-      this.value = "";
-    }   
-    if(this.value !== "") {
-      this.focus = true;
-    }  
-      
+    this.name = "";
+    this.value = this.hasAttribute("min") ? parseFloat(this.getAttribute("min")) : 1;
+    this.min = 1;
+    this.max = 9999999999999;
+    this.step = 1;
+    this.maxlength = 3;
+    this.class="";
+    this.id= this.hasAttribute("name") ? this.getAttribute("name") : "n" + uuidv4();
+   
+  }  
+  
+  firstUpdated() {
+    this.max = parseFloat(this.max.toString().substring(0,this.maxlength));
   }
 
   createRenderRoot() {
@@ -57,37 +48,38 @@ export class DefaultQuantity extends LitElement {
   }
   
   onKeyUp() {
-  //  console.log(this.value);
+    // console.log("keyup", this.value, this.min, this.value === "" || this.value < this.min)
+    // if(this.value === "" || this.value < this.min) {  
+    //   this.value = this.min;      
+    // }
   }
   onKeyDown(e) {
     this.dispatchEvent(new Event('keyup',{bubbles: true, cancelable: true}));
 
     let regex = RegExp("^[0-9.][0-9.]*$");  
-    
-    if(!regex.test(e.key) && e.keyCode !== 8) {
+    if(!regex.test(e.key) && e.keyCode !== 8 && e.keyCode !== 37 && e.keyCode !==39 || (e.currentTarget.value.length === this.maxlength  && e.keyCode !== 8 && e.keyCode !== 37 && e.keyCode !==39)) {
       e.preventDefault();
     } 
 
   }
-  onFocusIn(e) {
-    this.focus = true
-  }
-  onBlur(e) {
-    this.dispatchEvent(new Event("blur", {bubbles: true,cancelable: true}));
-    if(this.value === "") {      
-      this.focus = false;
-      if(this.required) {
-        this.error = true;
-      } 
+  // onFocusIn(e) {
+  //   this.focus = true
+  // }
+  
+  onChange(e) {
+    this.value= e.currentTarget.value;   
+    if(this.value === "" || this.value < this.min) {  
+      this.value = this.min;
     }
-  }  
+    this.dispatchEvent(new Event("blur", {bubbles: true,cancelable: true}));
+  } 
   
   
   render() {    
 
     return html`
-    <div class="df-quantity ${this.class} ${this.focus ? "focus" : ""} ${this.error ? "alert" : ""}">       
-      <input type="text" ?readonly=${this.readonly} ?disabled=${this.disabled} name="${this.name}" id="${this.id}__element" class="df-quantity__input" value="${this.value}" @keyup=${e=>this.onKeyUp()} @keydown=${e=>this.onKeyDown(e)} @focusin=${(e)=>this.onFocusIn(e)} @blur=${(e)=>this.onBlur(e)} autocomplete="no" />     
+    <div class="df-quantity ${this.class}" style="--maxlength: ${this.maxlength}em">       
+      <input type="number" ?readonly=${this.readonly} ?disabled=${this.disabled} name="${this.name}" id="${this.id}__element" class="df-quantity__input" value="${this.value}" @keyup=${e=>this.onKeyUp(e)} @keydown=${e=>this.onKeyDown(e)}  @change=${e=>this.onChange(e)} autocomplete="no" maxlength="${this.maxlength}" min="${this.min}" max="${this.max}" step="${this.step}" />     
     </div> 
     `;
   }
