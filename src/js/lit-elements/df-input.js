@@ -134,7 +134,7 @@ export class DefaulInput extends LitElement {
   
   render() {    
     return html`
-    <div class="df-input ${this.class} ${this.error ? "alert" : ""} ${this.focus ? "focus" : ""}">  
+    <div class="df-input">  
       ${this.placeholder !== "" ? this.focus ? "" : html`<label class="df-input__label" for=${this.id}__element>${this.placeholder}</label>` : html`<label class="df-input__label" for=${this.id}__element>${this.label}</label> `}
       <input type="${this.type==="password" ? "password" : "text"}" ?required=${this.required} ?readonly=${this.readonly} ?disabled=${this.disabled} name="${this.name}" id="${this.id}__element" class="df-input__input" value="${this.value}" @keydown=${e=>this.onKeyDown(e)} @keyup=${e=>this.onKeyUp(e)} @focusin=${(e)=>this.onFocusIn(e)} @blur=${(e)=>this.onBlur(e)} autocomplete="no" />     
       ${this.type==="password" ? 

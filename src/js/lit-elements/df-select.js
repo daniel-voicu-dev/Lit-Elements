@@ -64,7 +64,8 @@ export class SelectDefault extends LitElement {
       readonly: {type: Boolean, reflect: true},
       disabled: {type: Boolean, reflect: true},
       required: {type: Boolean, reflect: true},
-      selected: {type: String}
+      selected: {type: String},
+      maxlength: {type: Number, attribute: false}
      
     };
   }  
@@ -88,14 +89,18 @@ export class SelectDefault extends LitElement {
     this.required = false;
     this.readonly = false;
     this.disabled = false;
+    this.minlength = 0;
   }
 
  
 
   
 
-  firstUpdated() {   
+  firstUpdated() {       
+    
+    this.minlength = Math.max(...this.innerContent.map(n=>n.querySelector(".df-option span").innerHTML.length),this.label.length*0.8, this.placeholder.length*0.8) ;   
     this.updateComplete.then(() => {  
+      this.style.setProperty("--minlength",this.minlength + "rem");
       if(this.selected !== "") {      
         let option = [...this.querySelector(".df-select__list").children].filter(n=>n.value === this.selected || n.label === this.selected);              
         if (option.length > 0) {  

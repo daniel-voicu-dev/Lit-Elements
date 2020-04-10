@@ -47,12 +47,7 @@ export class DefaultQuantity extends LitElement {
     return this;
   }
   
-  onKeyUp() {
-    // console.log("keyup", this.value, this.min, this.value === "" || this.value < this.min)
-    // if(this.value === "" || this.value < this.min) {  
-    //   this.value = this.min;      
-    // }
-  }
+  
   onKeyDown(e) {
     this.dispatchEvent(new Event('keyup',{bubbles: true, cancelable: true}));
 
@@ -62,9 +57,7 @@ export class DefaultQuantity extends LitElement {
     } 
 
   }
-  // onFocusIn(e) {
-  //   this.focus = true
-  // }
+  
   
   onChange(e) {
     this.value= e.currentTarget.value;   
@@ -78,8 +71,8 @@ export class DefaultQuantity extends LitElement {
   render() {    
 
     return html`
-    <div class="df-quantity ${this.class}" style="--maxlength: ${this.maxlength}em">       
-      <input type="number" ?readonly=${this.readonly} ?disabled=${this.disabled} name="${this.name}" id="${this.id}__element" class="df-quantity__input" value="${this.value}" @keyup=${e=>this.onKeyUp(e)} @keydown=${e=>this.onKeyDown(e)}  @change=${e=>this.onChange(e)} autocomplete="no" maxlength="${this.maxlength}" min="${this.min}" max="${this.max}" step="${this.step}" />     
+    <div class="df-quantity" style="--maxlength: ${this.maxlength}em">       
+      <input type="number" ?readonly=${this.readonly} ?disabled=${this.disabled} name="${this.name}" id="${this.id}__element" class="df-quantity__input" value="${this.value}" @keydown=${e=>this.onKeyDown(e)}  @change=${e=>this.onChange(e)} autocomplete="no" maxlength="${this.maxlength}" min="${this.min}" max="${this.max}" step="${this.step}" />     
     </div> 
     `;
   }

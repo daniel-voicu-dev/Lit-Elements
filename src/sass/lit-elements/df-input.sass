@@ -1,44 +1,44 @@
-df-input 
+df-input
   position: relative
   align-items: center
   display: flex
-  flex-wrap: wrap    
+  flex-wrap: wrap
   align-items: center
   font-size: 1.4rem
-  height: calc(var(--form-line-height, 4rem) 
+  height: var(--form-line-height, 4rem)
   overflow: hidden
   --icon-size: 2rem
   --icon-padding: 0.5rem
   &[disabled]
     opacity: 0.6
     *
-      cursor: not-allowed 
+      cursor: not-allowed
   &[readonly]
     *
-      cursor: not-allowed 
+      cursor: not-allowed
   &[error]
-    .df-input     
+    .df-input
       color: var(--color-alert)
-      --form-border-color: var(--color-alert)      
-    .df-input__label       
-      color: var(--color-alert)   
+      --form-border-color: var(--color-alert)
+    .df-input__label
+      color: var(--color-alert)
   &[focus]
-    .df-input__label 
-      transform: translateY(-34%)      
-.df-input    
-  background-color: var(--form-bg-color, #fff)  
+    .df-input__label
+      transform: translateY(-34%)
+.df-input
+  background-color: var(--form-bg-color, #fff)
   color: var(--form-color, var(--color-content))
   position: relative
   display: grid
   grid-template-columns: 1fr auto
   align-items: center
   width: 100%
-  height: calc(var(--form-line-height, 4rem) - 2*var(--form-border-size, 0rem))   
-  border: var(--form-border-size) solid var(--form-border-color, #d0d0d0) 
+  //height: calc(var(--form-line-height, 4rem) - 2*var(--form-border-size, 0rem))
+  border: var(--form-border-size) solid var(--form-border-color, #d0d0d0)
   border-radius: var(--form-border-radius, 0)
   transition: var(--transition)
   overflow: hidden
-  button 
+  button
     background-color: transparent
     --button-border-size: 0
     --icon-color: var(--color-content)
@@ -52,12 +52,8 @@ df-input
     grid-area: 1/1/1/2
     color: var(--form-placeholder-color, lightgray)
     top: 0
-    line-height: var(--form-line-height, 4rem)  
-    transition: var(--transition) 
-  &__input  
-    line-height: var(--form-line-height, 4rem)
-     
-
-       
-
-  
+    line-height: calc(var(--form-line-height, 4rem) - 2*var(--form-border-size, 0rem))
+    transition: var(--transition)
+  &__input
+    line-height: calc(var(--form-line-height, 4rem) - 2*var(--form-border-size, 0rem))    
+    
