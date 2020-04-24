@@ -7,6 +7,10 @@ module.exports = {
   entry: {
     app: './src/app.js',
     elements: './src/elements.js',
+    alert: './src/alert.js',
+  },
+  output: {
+    module: true
   },
   module: {
     rules: [
@@ -19,10 +23,22 @@ module.exports = {
           'css-loader',
           // Compiles Sass to CSS
           'sass-loader',
-        ],
+        ],        
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.css$/i,
+  //       use: ['style-loader', 'css-loader'],
+  //     },
+  //   ],
+  // },
   devServer: {
       // contentBase: './dist',
       hot: true

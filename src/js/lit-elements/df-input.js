@@ -9,8 +9,7 @@ export class DefaulInput extends LitElement {
       type: {type: String},
       value: {type: String, reflect: true},
 
-      class: {type: String},
-      id: {type: String},
+      class: {type: String},      
       label: {type: String},
       placeholder: {type: String},     
       mask: {type: String},      
@@ -31,7 +30,7 @@ export class DefaulInput extends LitElement {
     this.value="";
 
     this.class="";    
-    this.id= this.hasAttribute("name") ? this.getAttribute("name") : "n"+uuidv4();
+    this.id= this.hasAttribute("id") ? this.getAttribute("id") : this.hasAttribute("name") ? this.getAttribute("name") : "n"+uuidv4();
     this.label="";
     this.placeholder="";
     this.mask=""
@@ -54,6 +53,19 @@ export class DefaulInput extends LitElement {
     if(this.value !== "") {
       this.focus = true;
     }    
+  }
+
+  updated(changedProperties) { 
+    changedProperties.forEach((oldValue, propName) => {         
+      if(propName === "value") {
+          if(this.value === "") {
+            this.focus = false;          
+          } else {
+            this.focus = true;          
+          }
+          this.dispatchEvent(new Event("change", {bubbles: true,cancelable: true}));   
+      } 
+    });
   }
 
   createRenderRoot() {

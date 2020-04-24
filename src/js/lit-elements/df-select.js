@@ -64,7 +64,7 @@ export class SelectDefault extends LitElement {
       readonly: {type: Boolean, reflect: true},
       disabled: {type: Boolean, reflect: true},
       required: {type: Boolean, reflect: true},
-      selected: {type: String},
+      selected: {type: String, reflect: true},
       maxlength: {type: Number, attribute: false}
      
     };
@@ -85,7 +85,7 @@ export class SelectDefault extends LitElement {
     this.class = "";  
     this.selected = "";
     this.innerContent = Array.from(this.children);
-    this.id= this.hasAttribute("name") ? this.getAttribute("name") : "n"+uuidv4();
+    this.id= this.hasAttribute("id") ? this.getAttribute("id") : this.hasAttribute("name") ? this.getAttribute("name") : "n"+uuidv4();
     this.required = false;
     this.readonly = false;
     this.disabled = false;
@@ -123,6 +123,49 @@ export class SelectDefault extends LitElement {
     });    
     
   }
+
+  updated(changedProperties) { 
+    changedProperties.forEach((oldValue, propName) => {
+      if(propName === "selected") {       
+        let option = [...this.querySelector(".df-select__list").children].filter(n=>n.value === this.selected || n.label === this.selected);    
+        if (option.length > 0) {  
+          option[0].checked = true;         
+          this.querySelector(".df-select__value--visible").innerHTML = option[0].innerHTML;
+          this.value = option[0].value;
+          this.updateComplete.then(()=>{
+            this.hasvalue = true;   
+            this.dispatchEvent(new Event("change", {bubbles: true,cancelable: true}));   
+          })          
+        } else {
+          console.log("Error finding the selected value!", this);
+        }
+      }   
+      if(propName === "value") {
+        if(this.value === "") {
+          this.hasvalue = false;
+          this.selected = "";
+          this.querySelector(".df-select__value--visible").innerHTML = "";
+          this.dispatchEvent(new Event("change", {bubbles: true,cancelable: true}));   
+          return;   
+        }
+        let option = [...this.querySelector(".df-select__list").children].filter(n=>n.value === this.value);    
+        if (option.length > 0) {  
+          option[0].checked = true;         
+          this.querySelector(".df-select__value--visible").innerHTML = option[0].innerHTML;          
+          this.updateComplete.then(()=>{
+            this.hasvalue = true;   
+            this.dispatchEvent(new Event("change", {bubbles: true,cancelable: true}));   
+          })          
+        } else {
+           console.log("Error finding the selected value!", this);
+           this.value = oldValue;
+          // this.updateComplete.then(()=>{
+          //   this.value = oldValue;
+          // })
+        }
+      } 
+    });
+   }
   
   handleChange(e) {     
     e.stopImmediatePropagation();

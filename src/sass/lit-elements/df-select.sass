@@ -34,9 +34,9 @@ df-select
       cursor: not-allowed !important
   &[error]
     .df-select
-      border-color: var(--color-alert)
+      border-color: var(--color-error)
     .df-select__label
-      color: var(--color-alert)
+      color: var(--color-error)
   .df-select    
     background-color: var(--form-bg-color, #fff)
     color: var(--form-color, var(--color-content))
@@ -110,6 +110,7 @@ df-select
 df-option
   display: flex
   flex-wrap: wrap
+  width: 100%
   > span
     display: none
 .df-option
