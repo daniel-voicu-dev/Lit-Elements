@@ -135,6 +135,7 @@ export class SelectDefault extends LitElement {
           } else {
             console.log("Error finding the selected value!", this);
             this.value = oldValue;
+            return;
           }
         }
         this.dispatchEvent(new Event("change", {bubbles: true,cancelable: true}))
