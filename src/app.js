@@ -19,6 +19,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
     Alert({mode: "tooltip", node: document.querySelector("#tooltip-test"), message: "Text 2", type: "error"});
   })
 
+  if(document.querySelector("#testEvents") !== null) {
+    document.querySelector("#testEvents").addEventListener("change", e => console.log("change", e.target))
+    document.querySelector("#testEvents").addEventListener("focusin", e => console.log("focusin", e.target))
+    document.querySelector("#testEvents").addEventListener("blur", e => console.log("blur", e.target))
+    document.querySelector("#testEvents").addEventListener("keyup", e => console.log("keyup", e.target))
+    document.querySelector("#testEvents").addEventListener("keydown", e => console.log("keydown", e.target))
+  }
+  if(document.querySelector("#testSelect") !== null) {
+    document.querySelector("#testSelect").addEventListener("change", e => console.log("change", e.target));   
+    document.querySelector("#testSelect").addEventListener("blur", e => console.log("blur", e.target));
+  }
+  
+
 });
 
 

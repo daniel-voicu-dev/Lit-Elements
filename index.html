@@ -18,6 +18,8 @@
       </div>
       <df-input type="email" name="email" value="" label="[label][email]" class="item"></df-input>
       <df-input type="password" name="password" value="" placeholder="[placeholder][password]" class="item" id="tooltip-test"></df-input>
+      <p>Events</p>
+      <df-input type="text" label="Label" name="testEvents" ></df-input>   
     </div>
     <div class="c">
       <h2 class="item">Select</h2>
@@ -49,7 +51,7 @@
         <df-option value="ES" label="Spain"><span>Spain</span></df-option>
         <df-option value="FR" label="France"><span>France</span></df-option>
       </df-select>    
-      <df-select name="test" value="" selected="" class="item" placeholder="[placeholder][required]" required>            
+      <df-select name="testSelect" value="" selected="" class="item" placeholder="[placeholder][required]" required>            
         <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
         <df-option value="RO" label="Romania"><span>Romania</span></df-option>
         <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
@@ -72,7 +74,8 @@
     <button type="button" class="alert">Notification Error</button>
 
   </div>
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
   <script src="app.bundle.js"></script>
   <script src="elements.bundle.js"></script>
 </body>
