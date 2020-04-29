@@ -100,23 +100,18 @@ export class SelectDefault extends LitElement {
 
 
 
-  firstUpdated() {
-    this.updateComplete.then(() => {
-      if(this.selected !== "") {
-        let option = [...this.querySelector(".df-select__list").children].filter(n=>n.value === this.selected || n.label === this.selected);          
-        if (option.length > 0) {         
-          this.value = option[0].value;       
-        } else {
-          console.log("Error finding the selected value!", this);
-        }
+  firstUpdated() {   
+    if(this.selected !== "") {
+      let option = [...this.querySelector(".df-select__list").children].filter(n=>n.value === this.selected || n.label === this.selected);          
+      if (option.length > 0) {        
+        console.log(option[0]) 
+        this.value = option[0].value;       
       } else {
-        let option = [...this.querySelector(".df-select__list").children].filter(n=>n.checked === true);
-        if(option.length > 0) {         
-          this.value = option[0].value;         
-        }
-
+        console.log("Error finding the selected value!", this);
       }
-
+    } 
+    this.updateComplete.then(() => {     
+      console.log("selected", this.name, this.selected)
     });
 
   }
