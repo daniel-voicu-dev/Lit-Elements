@@ -4,7 +4,7 @@ export class TextareaDefault extends LitElement {
     return {          
       error: {type: Boolean, reflect: true},
       focus: {type: Boolean, reflect: true},
-      value: {type: String, attribute: "value", reflect: true},
+      value: {type: String,  reflect: true},
       required: {type: Boolean, attribute: "required", reflect: true},
       password: {type: Boolean},
       valid: {type: Boolean}
@@ -19,10 +19,29 @@ export class TextareaDefault extends LitElement {
     this.mask = this.hasAttribute("mask") ? this.getAttribute("mask") : null;
   }
 
+  firstUpdated() {
+    if(this.value !== "") {
+      this.focus = true;
+    }
+  }
   
   createRenderRoot() {
     return this;
   }
+  updated(changedProperties) {
+    changedProperties.forEach((oldValue, propName) => {
+      if(propName === "value") {
+        if(this.value === "") {
+          this.focus = false;
+        } else {
+          this.focus = true;
+        }
+       
+        this.dispatchEvent(new Event("change", {bubbles: true,cancelable: true}));
+      }
+    });
+  }
+  
 
   onKeyUp(e) {
     this.value = e.target.value;  
@@ -51,9 +70,9 @@ export class TextareaDefault extends LitElement {
   render() {    
 
     return html`
-    <div class="df-textarea ${this.class} ${this.focus ? "focus" : ""} ${this.error ? "alert" : ""}"}>  
+    <div class="df-textarea ${this.class} ${this.focus ? "focus" : ""} ${this.error ? "alert" : ""}">  
       <label class="df-textarea__label" for=${this.name}__element>${this.label}</label>  
-      <textarea name="${this.name}" id="${this.name}__element" class="df-textarea__textarea" value="${this.value}"  @keyup=${e=>this.onKeyUp(e)} @focusin=${(e)=>this.onFocusIn(e)} @blur=${(e)=>this.onBlur(e)}></textarea> 
+      <textarea name="${this.name}" id="${this.name}__element" class="df-textarea__textarea" value="${this.value}"  @keyup=${e=>this.onKeyUp(e)} @focusin=${(e)=>this.onFocusIn(e)} @blur=${(e)=>this.onBlur(e)}>${this.value}</textarea> 
     </div> 
     `;
   }

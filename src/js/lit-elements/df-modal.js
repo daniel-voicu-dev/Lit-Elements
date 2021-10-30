@@ -1,6 +1,5 @@
-import {v4 as uuidv4} from "uuid"
 import { LitElement, html } from "lit-element"
-import {animateCSS} from "./utilities.js"
+import {animateCSS, uuidv4} from "./../../utilities.js"
 
 export class ModalDefault extends LitElement {
   static get properties() {
@@ -25,7 +24,6 @@ export class ModalDefault extends LitElement {
     this.updateComplete.then(()=>{
      
       if(this.open === true) {
-        console.log(this.querySelector(".modal"))
         document.querySelector("body").style.setProperty("height","100vh");
         document.querySelector("body").style.setProperty("overflow-y","hidden");
         this.querySelector(".modal").style.setProperty("display","flex");
@@ -68,9 +66,9 @@ export class ModalDefault extends LitElement {
     return html`
     <section id="${this.id}__id" class="modal ${this.class}" @click=${e =>this.onBackdropClick(e)}>        
         <article class="modal__content">
-            <button type="button" class="btn-icon modal__close" @click=${e=>this.closeModal()}><ion-icon src="${window.variables.iconsURL}/close-raw.svg"></ion-icon></button>
+            <button type="button" class="btn-icon bg-light modal__close" @click=${e=>this.closeModal()}><div class="ico"><svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><line x1='368' y1='368' x2='144' y2='144' style='fill:none;stroke:var(--icon-color, #2e3b42);stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/><line x1='368' y1='144' x2='144' y2='368' style='fill:none;stroke:var(--icon-color, #2e3b42);stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/></svg></div></button>
             ${this.heading !== null ?
-              html`<header><h2 class="modal__heading">${this.heading}</h2></header>` :
+              html`<header><h6 class="modal__heading h4 text-uppercase letter-spacing line-height-inline">${this.heading}</h6></header>` :
               html``
             } 
             <main>

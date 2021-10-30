@@ -23,28 +23,29 @@
     </div>
     <div class="c">
       <h2 class="item">Select</h2>
-      <df-select name="Countries1" label="[label][required]" value="" selected="Romania" class="item" required>            
+      <df-select name="Countries1" label="[label][required]" value="" class="item" required>  
+        <df-option><span>Select a country</span></df-option>          
+        <df-option value="EN" label="United Kingdom"><svg style="margin-right: 0.5rem;" xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 512 512'><path d='M80,480a16,16,0,0,1-16-16V68.13A24,24,0,0,1,75.9,47.41C88,40.38,112.38,32,160,32c37.21,0,78.83,14.71,115.55,27.68C305.12,70.13,333.05,80,352,80a183.84,183.84,0,0,0,71-14.5,18,18,0,0,1,25,16.58V301.44a20,20,0,0,1-12,18.31c-8.71,3.81-40.51,16.25-84,16.25-24.14,0-54.38-7.14-86.39-14.71C229.63,312.79,192.43,304,160,304c-36.87,0-55.74,5.58-64,9.11V464A16,16,0,0,1,80,480Z'/></svg> United Kingdom</df-option>
+        <df-option value="RO" label="Romania"><svg style="margin-right: 0.5rem;" xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 512 512'><path d='M80,480a16,16,0,0,1-16-16V68.13A24,24,0,0,1,75.9,47.41C88,40.38,112.38,32,160,32c37.21,0,78.83,14.71,115.55,27.68C305.12,70.13,333.05,80,352,80a183.84,183.84,0,0,0,71-14.5,18,18,0,0,1,25,16.58V301.44a20,20,0,0,1-12,18.31c-8.71,3.81-40.51,16.25-84,16.25-24.14,0-54.38-7.14-86.39-14.71C229.63,312.79,192.43,304,160,304c-36.87,0-55.74,5.58-64,9.11V464A16,16,0,0,1,80,480Z'/></svg> Romania</df-option>
+        <df-option value="DK" label="Denmark"><svg style="margin-right: 0.5rem;" xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 512 512'><path d='M80,480a16,16,0,0,1-16-16V68.13A24,24,0,0,1,75.9,47.41C88,40.38,112.38,32,160,32c37.21,0,78.83,14.71,115.55,27.68C305.12,70.13,333.05,80,352,80a183.84,183.84,0,0,0,71-14.5,18,18,0,0,1,25,16.58V301.44a20,20,0,0,1-12,18.31c-8.71,3.81-40.51,16.25-84,16.25-24.14,0-54.38-7.14-86.39-14.71C229.63,312.79,192.43,304,160,304c-36.87,0-55.74,5.58-64,9.11V464A16,16,0,0,1,80,480Z'/></svg> Denmark</df-option>
+        <df-option value="ES" label="Spain"><svg style="margin-right: 0.5rem;" xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 512 512'><path d='M80,480a16,16,0,0,1-16-16V68.13A24,24,0,0,1,75.9,47.41C88,40.38,112.38,32,160,32c37.21,0,78.83,14.71,115.55,27.68C305.12,70.13,333.05,80,352,80a183.84,183.84,0,0,0,71-14.5,18,18,0,0,1,25,16.58V301.44a20,20,0,0,1-12,18.31c-8.71,3.81-40.51,16.25-84,16.25-24.14,0-54.38-7.14-86.39-14.71C229.63,312.79,192.43,304,160,304c-36.87,0-55.74,5.58-64,9.11V464A16,16,0,0,1,80,480Z'/></svg> Spain</df-option>
+        <df-option value="FR" label="France"><svg style="margin-right: 0.5rem;" xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 512 512'><path d='M80,480a16,16,0,0,1-16-16V68.13A24,24,0,0,1,75.9,47.41C88,40.38,112.38,32,160,32c37.21,0,78.83,14.71,115.55,27.68C305.12,70.13,333.05,80,352,80a183.84,183.84,0,0,0,71-14.5,18,18,0,0,1,25,16.58V301.44a20,20,0,0,1-12,18.31c-8.71,3.81-40.51,16.25-84,16.25-24.14,0-54.38-7.14-86.39-14.71C229.63,312.79,192.43,304,160,304c-36.87,0-55.74,5.58-64,9.11V464A16,16,0,0,1,80,480Z'/></svg> France</df-option>
+      </df-select>
+      <!-- <df-select name="Countries2" value="" selected="" class="item" placeholder="[placeholder][required][disabled]" required disabled>            
         <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
         <df-option value="RO" label="Romania"><span>Romania</span></df-option>
         <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
         <df-option value="ES" label="Spain"><span>Spain</span></df-option>
         <df-option value="FR" label="France"><span>France</span></df-option>
       </df-select>
-      <df-select name="Countries2" value="" selected="" class="item" placeholder="[placeholder][required][disabled]" required disabled>            
+      <df-select name="Countries3" value="" selected="Romania" class="item" placeholder="[placeholder][disabled]" disabled>            
         <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
         <df-option value="RO" label="Romania"><span>Romania</span></df-option>
         <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
         <df-option value="ES" label="Spain"><span>Spain</span></df-option>
         <df-option value="FR" label="France"><span>France</span></df-option>
       </df-select>
-      <df-select name="Countries2" value="" selected="Romania" class="item" placeholder="[placeholder][disabled]" disabled>            
-        <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
-        <df-option value="RO" label="Romania"><span>Romania</span></df-option>
-        <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
-        <df-option value="ES" label="Spain"><span>Spain</span></df-option>
-        <df-option value="FR" label="France"><span>France</span></df-option>
-      </df-select>
-      <df-select name="Countries2" value="" selected="ES" class="item" placeholder="[placeholder][readonly]" readonly>            
+      <df-select name="Countries4" value="" selected="ES" class="item" placeholder="[placeholder][readonly]" readonly>            
         <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
         <df-option value="RO" label="Romania"><span>Romania</span></df-option>
         <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
@@ -58,6 +59,14 @@
         <df-option value="ES" label="Spain"><span>Spain</span></df-option>
         <df-option value="FR" label="France"><span>France</span></df-option>
       </df-select>
+
+      <df-select name="testSelect2" value="" class="item" placeholder="[placeholder][required]" required>            
+        <df-option value="EN" label="United Kingdom"><span>United Kingdom</span></df-option>
+        <df-option value="RO" label="Romania"><span>Romania</span></df-option>
+        <df-option value="DK" label="Denmark"><span>Denmark</span></df-option>
+        <df-option value="ES" label="Spain" checked><span>Spain</span></df-option>
+        <df-option value="FR" label="France"><span>France</span></df-option>
+      </df-select> -->
     </div>
     <div class="c">
       <h2 class="item">Quantity</h2>
@@ -76,7 +85,10 @@
   </div>
   <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+
+  
   <script src="app.bundle.js"></script>
   <script src="elements.bundle.js"></script>
+
 </body>
 </html>

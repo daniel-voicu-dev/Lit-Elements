@@ -30,6 +30,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
     document.querySelector("#testSelect").addEventListener("change", e => console.log("change", e.target));   
     document.querySelector("#testSelect").addEventListener("blur", e => console.log("blur", e.target));
   }
+  if(document.querySelector("#testSelect2") !== null) {
+    console.log("EVENTSLOADED")
+    document.querySelector("#testSelect2").addEventListener("change", e => console.log("change", e.target));   
+    document.querySelector("#testSelect2").addEventListener("blur", e => console.log("blur", e.target));
+  }
   
 
 });

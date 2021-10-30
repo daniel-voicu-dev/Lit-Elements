@@ -1,6 +1,5 @@
 import { LitElement, html } from "lit-element"
-import {siblings} from "./utilities.js"
-import {v4 as uuidv4} from "uuid"
+import {siblings, uuidv4} from "./../../utilities.js"
 
 export class SelectOptionDefault extends LitElement {
   static get properties() {
@@ -9,26 +8,40 @@ export class SelectOptionDefault extends LitElement {
       label: { type: String},
       value: { type: String},
       innerContent: {type: Array},
+      cancel: {type:Boolean, attribute:false},
+      firstUpdate: {type: Boolean, attribute:false}
     };
   }
 
   constructor(){
     super();
-    this.checked = false;
+    // this.checked = false;
     this.label = "";
     this.value = "";
     this.innerContent = Array.from(this.children);
+    this.cancel = false;
+    this.firstUpdate = false;
+    this.checked = false;
   }
 
-  handleClick(e){   
-    this.checked = true;   
+  handleClick(e){
+    this.checked = true;
   }
-  updated(changedProperties) {
-    changedProperties.forEach((oldValue, propName) => {  
-      if(propName === "checked" && this.checked === true ) {
-        [...siblings(this)].forEach(el=>el.removeAttribute("checked"));
-        this.dispatchEvent(new CustomEvent("selectChanged", {bubbles: true,cancelable: true, detail: {target: this}}));
-      }        
+  firstUpdated() {
+    this.firstUpdate = true;
+  }
+  updated(changedProperties) {    
+    changedProperties.forEach((oldValue, propName) => {
+      // if(propName === "checked") {
+      //   console.log({oldValue, currentValue: this.checked, propName, el: this.label});  
+      // }
+      if(propName === "checked" && this.checked === true && oldValue === false) {
+        // console.log({oldValue, currentValue: this.checked, propName, el: this.label});
+
+        this.dispatchEvent(new CustomEvent("selectChanged", {bubbles: true,cancelable: true, detail: {target: this, cancel: this.cancel}}));  
+        
+         
+      }
     });
   }
 
@@ -100,60 +113,83 @@ export class SelectDefault extends LitElement {
 
 
 
-  firstUpdated() {   
+  firstUpdated() {
     if(this.selected !== "") {
-      let option = [...this.querySelector(".df-select__list").children].filter(n=>n.value === this.selected || n.label === this.selected);          
-      if (option.length > 0) {        
-        console.log(option[0]) 
-        this.value = option[0].value;       
+      
+      let option = [...this.querySelector(".df-select__list").children].filter(n=>n.value === this.selected || n.label === this.selected);
+      // console.log(option[0].value);
+      if (option.length > 0) {
+        option[0].cancel = true;
+        this.value = option[0].value;
+        this.updateComplete.then(()=>{
+          option[0].cancel = false;
+         })
       } else {
         console.log("Error finding the selected value!", this);
       }
-    } 
-    this.updateComplete.then(() => {     
-      console.log("selected", this.name, this.selected)
-    });
+    } else {
+      let option = [...this.querySelector(".df-select__list").children].filter(n=>n.checked === true);
+      if (option.length > 0) {
+        option[0].cancel = true;
+        this.value = option[0].value;
+        this.error = false;
+        this.hasvalue = true;
+        this.writing = false;
+        this.querySelector(".df-select__value--visible").innerHTML= option[0].innerHTML;
+        this.updateComplete.then(()=>{
+          option[0].cancel = false;
+        })
+      } else {
+        if(this.value !== "") {
+          console.log("Error finding the selected value!", this);
+        }
 
+      }
+    }
   }
   updated(changedProperties) {
-    changedProperties.forEach((oldValue, propName) => {      
-      if(propName === "value" && this.value !== undefined) {        
-        if(this.value === "") {
+    changedProperties.forEach((oldValue, propName) => {
+      if(propName === "value" && this.value !== undefined && oldValue !== undefined) {
+        //console.log({oldValue, "newValue": this.value, node: this})
+        if(this.value === "" && oldValue !== undefined ) {
           this.hasvalue = false;
           this.selected = "";
-          this.querySelector(".df-select__value--visible").innerHTML = "";              
+          this.querySelector(".df-select__value--visible").innerHTML = "";
+          [...this.querySelectorAll("df-option")].forEach(el=>el.checked = false);
           return;
         } else {
+          // console.log("value:",this.value)   
           let option = [...this.querySelector(".df-select__list").children].filter(n=>n.value === this.value);
           if (option.length > 0) {
-            option[0].checked = true;                                
+            option[0].checked = true;
           } else {
-            console.log("Error finding the selected value!", this);
+            //console.log("Error finding the selected value!", this);
             this.value = oldValue;
             return;
           }
         }
-        this.dispatchEvent(new Event("change", {bubbles: true,cancelable: true}))
       }
     });
   }
 
   handleChange(e) {
-    //console.log("checked option changed to true", e.detail.target)
     e.stopImmediatePropagation();
     e.preventDefault();
-    let target = e.detail.target;
+    let {target, cancel} = e.detail;
+    [...siblings(target)].forEach(el=>el.checked = false);
     this.value = target.value;
     this.selected = target.value;
     this.error = false;
     this.hasvalue = true;
-    //this.open = false;
     this.writing = false;
-    this.querySelector(".df-select__value--visible").innerHTML= target.innerHTML;    
-    // this.updateComplete.then(()=>{     
-    //   this.dispatchEvent(new Event("change", {bubbles: true,cancelable: true}));
-    // });
-
+    this.querySelector(".df-select__value--visible").innerHTML= target.innerHTML;
+    // alert("value:" + cancel);
+    this.updateComplete.then(()=>{
+      if(!cancel) {
+        this.dispatchEvent(new Event("change", {bubbles: true,cancelable: true}));
+      }  
+    })
+    
   }
 
 
@@ -229,14 +265,15 @@ export class SelectDefault extends LitElement {
     super.connectedCallback();
   }
 
+
   render() {
 
     return html`    
-    <div class="df-select" @selectChanged=${e=>this.handleChange(e)} @click=${(e)=>this.toggleList(e)} >
+    <div class="df-select" @selectChanged=${e=>this.handleChange(e)} @click=${(e)=>this.toggleList(e)}>
       <div class="df-select__value--visible"></div>     
       ${this.placeholder !== "" ? this.focus || this.hasvalue ? "" : html`<label class="df-select__label" for=${this.id}__element>${this.placeholder}</label>` : html`<label class="df-select__label" for=${this.id}__element>${this.label}</label> `}  
-      <button type="button" class="df-select__trigger">
-        ${this.open ? html`<ion-icon name="chevron-up"></ion-icon>` : html`<ion-icon name="chevron-down"></ion-icon>`}
+      <button type="button" class="df-select__trigger" aria-label="Open select values">
+        ${this.open ? html`<ion-icon src="${window.variables.iconsURL}chevron-up.svg"></ion-icon>` : html`<ion-icon src="${window.variables.iconsURL}chevron-down.svg"></ion-icon>`}
       </button>
       <div class="df-select__list" >
         ${this.elementChildren}
@@ -252,7 +289,7 @@ customElements.define('df-select', SelectDefault);
 
 window.addEventListener("click",e=>{
   // console.log(e)
-  let dfSelects = e.path.filter(el=>{
+  let dfSelects = e.composedPath().filter(el=>{
     return el.tagName !== undefined && el.closest("df-select") !== null
     //return el.tagName !== undefined && el.tagName.includes("DF-SELECT")
   }).filter(el => el.open === true);
