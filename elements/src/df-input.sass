@@ -1,0 +1,119 @@
+*
+  box-sizing: border-box 
+html, body
+  font-family: "Verdana", sans-serif  
+body 
+  padding-top: 20px  
+df-input
+  display: inline-flex
+  // height: var(--form-line-height, 40px)
+  vertical-align: middle
+  position: relative
+  z-index: unset
+input 
+  font-family: "Verdana", sans-serif  
+.tooltip
+  position: relative 
+  position: absolute
+  right: 10px
+  top: 10px
+  &:hover 
+    .tooltip__content
+      opacity: 1      
+  &__icon
+    position: relative
+    display: inline-flex
+  &__content    
+    position: absolute
+    right: -5px
+    top: -25px
+    background-color: red
+    color: #fff
+    padding: 5px 5px
+    font-size: 10px
+    width: max-content
+    line-height: 1
+    transition: all 0.1s ease-in
+    opacity: 0
+    border-radius: 2px
+    &::after
+      position: absolute
+      top: 100% 
+      right: 10px
+      content: ""
+      width: 0
+      height: 0
+      border-left: 5px solid transparent
+      border-right: 5px solid transparent
+      border-top: 5px solid red
+.df-input   
+  display: grid
+  grid-template-columns: minmax(0,1fr) 
+  background: var(--form-bg, #fff)
+  position: relative
+  z-index: 0
+  width: 100%
+  svg 
+    height: 100%
+    width: 100%
+  .icon    
+    // position: absolute
+    // right: -9px
+    // top: -9px   
+    &.error svg 
+      color: var(--color-error, red)
+    svg       
+      max-height: 20px
+  &.error
+    --form-border-color: var(--color-error, red)
+    --form-outline: var(--color-error, red)
+  &__placeholder
+    grid-area: 1/1/2/2
+    position: relative
+    z-index: -1
+    padding: 0px var(--form-inner-padding, 10px)
+    display: flex 
+    flex-wrap: wrap 
+    align-items: center
+    font-size: 10px
+    color: var(--form-placeholder-color, slategray)
+  &__label
+    grid-area: 1/1/2/2
+    position: relative
+    z-index: -1
+    padding: 0px var(--form-inner-padding, 10px)
+    display: flex 
+    flex-wrap: wrap 
+    align-items: center
+    font-size: 10px
+    color: var(--form-placeholder-color, slategray)
+    transform-origin: center
+    transition: all 0.1s ease-in
+    // .error & 
+    //   color: var(--color-error, red)
+    .focused & 
+      transform: translateY(-34%)
+  &__input
+    grid-area: 1/1/2/2    
+    .error & 
+      color: var(--color-error, red)
+    .focused  &
+      //border-color: var(--form-outline, blue)   
+  input 
+    display: flex 
+    flex-wrap: wrap
+    padding: 0px var(--form-inner-padding, 10px)  
+    line-height: calc(var(--form-line-height, 40px) - 2*var(--form-border-width, 1px))
+    border: var(--form-border-size, 1px) solid var(--form-border-color,lightgray)
+    border-radius: var(--form-border-radius, 0px)
+    background: transparent
+    color: var(--form-color, black)
+    &:focus, &:focus-visible
+      outline: 1px solid var(--form-outline, black) 
+    
+    
+    
+
+  
+
+
